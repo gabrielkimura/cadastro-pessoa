@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Gerenciamento de Pessoas</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="messages" showDetail="true"/>
+
+        <h:panelGrid columns="3">
+            <h:outputLabel for="nome" value="Nome:"/>
+            <p:inputText id="nome" value="#{pessoaBean.pessoa.nome}"/>
+            <h:commandButton value="Consultar" action="#{pessoaBean.consultar}" update="@form"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel for="idade" value="Data de Nascimento:"/>
+            <p:calendar id="idade" value="#{pessoaBean.pessoa.idade}" pattern="dd/MM/yyyy"/>
+
+            <h:outputLabel for="sexo" value="Sexo:"/>
+            <p:selectOneMenu id="sexo" value="#{pessoaBean.pessoa.sexo}">
+                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                <f:selectItem itemLabel="Feminino" itemValue="F"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel for="estado" value="Estado:"/>
+            <p:inputText id="estado" value="#{pessoaBean.endereco.estado}"/>
+
+            <h:outputLabel for="cidade" value="Cidade"/>
+            <p:inputText id="cidade" value="#{pessoaBean.endereco.cidade}"/>
+
+            <h:outputLabel for="logradouro" value="Logradouro:"/>
+            <p:inputText id="logradouro" value="#{pessoaBean.endereco.logradouro}"/>
+
+            <h:outputLabel for="cep" value="CEP:"/>
+            <p:inputText id="cep" value="#{pessoaBean.endereco.cep}"/>
+
+            <h:commandButton value="Adicionar Endereço" action="#{pessoaBean.addEndereco}" update="@form"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Endereços:"/>
+            <p:dataTable value="#{pessoaBean.pessoa.enderecos}" var="endereco">
+                <p:column headerText="Estado">
+                    <h:outputText value="#{endereco.estado}"/>
+                </p:column>
+                <p:column headerText="Cidade">
+                    <h:outputText value="#{endereco.cidade}"/>
+                </p:column>
+                <p:column headerText="Logradouro">
+                    <h:outputText value="#{endereco.logradouro}"/>
+                </p:column>
+                <p:column headerText="CEP">
+                    <h:outputText value="#{endereco.cep}"/>
+                </p:column>
+                <p:column>
+                    <h:commandButton value="Remover" action="#{pessoaBean.removeEndereco(endereco)}" update="@form"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGrid>
+
+        <h:commandButton value="Salvar" action="#{pessoaBean.save}" update=":form"/>
+        <h:commandButton value="Apagar Pessoa e Endereços" action="#{pessoaBean.deleteAll}" update=":form"/>
+    </h:form>
+</h:body>
+</html>
