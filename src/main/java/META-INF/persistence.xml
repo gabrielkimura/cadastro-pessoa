@@ -12,11 +12,11 @@
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:postgresql://localhost:5432/Pessoas" />
+				value="jdbc:postgresql://localhost:5432/" />
 			<property name="javax.persistence.jdbc.user"
-				value="postgres" />
+				value="" />
 			<property name="javax.persistence.jdbc.password"
-				value="admin" />
+				value="" />
 			<property name="javax.persistence.jdbc.driver"
 				value="org.postgresql.Driver" />
 			<property name="hibernate.dialect"
